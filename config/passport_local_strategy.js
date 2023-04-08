@@ -13,6 +13,7 @@ passport.use(new LocalStrategy({
         try {
             let user = await User.findOne({email : email});
             if(!user || user.password != password){
+                req.flash('error','Invalid Username/Password');
                 return done(null, false);
             }
             return done(null,user);

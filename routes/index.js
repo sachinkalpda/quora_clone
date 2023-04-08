@@ -9,5 +9,6 @@ const passport = require('passport');
 router.get('/',passport.checkAuthentication,homepageController.home);
 
 router.use('/user',require('./user'));
+router.use('/question',require('./question'));
 
 module.exports = router;

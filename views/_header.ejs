@@ -20,14 +20,14 @@
                 <div class="dropdown">
                     <img src="./images/user.jpg" height="50px" width="50px" role="button" class="dropdown-toggle" data-bs-toggle="dropdown">
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Hii, <%= locals.user.name  %></a></li>
+                    <li><a class="dropdown-item" href="/user/profile"><i class="fa-regular fa-user"></i> Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="/user/logout">Log Out</a></li>
+                    <li><a class="dropdown-item" href="/user/logout"><i class="fa-solid fa-power-off"></i> Log Out</a></li>
                   </ul>
                 </div>
                 <div class="button-group">
-                    <button class="theme-btn rounded-pill ms-3" data-bs-toggle="modal" data-bs-target="#addQuestion">Add</button>
+                    <button class="theme-btn rounded-pill ms-3" data-bs-toggle="modal" data-bs-target="#addQuestion">Add Question</button>
                 </div>
             </div>
         </div>
