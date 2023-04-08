@@ -149,6 +149,8 @@ nav{
     margin-bottom: 0;
 }
 .nav-right{
+    display: flex;
+    align-items: center;
     flex: 0 0 20%;
 }
 
