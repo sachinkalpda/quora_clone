@@ -1,0 +1,25 @@
+{
+  "name": "quora_clone",
+  "version": "1.0.0",
+  "description": "Quora Clone",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sachinkalpda/quora_clone.git"
+  },
+  "author": "Sachin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sachinkalpda/quora_clone/issues"
+  },
+  "homepage": "https://github.com/sachinkalpda/quora_clone#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^7.0.3"
+  }
+}

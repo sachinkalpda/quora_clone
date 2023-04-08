@@ -1,0 +1,467 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: url('../images/login_bg.jpg');
+    background-size: cover;
+}
+.login-card{
+    padding: 1rem 1rem;
+    width: 50vw;
+    background-color: #fff;
+    border-radius: 5px;
+}
+.login-card-header{
+    text-align: center;
+    padding: 10px 0px;
+}
+.login-card-header h2{
+    font-size: 3rem;
+    color: #b92b27;
+}
+.login-card-header p{
+    font-size: 15px;
+    font-weight: 600;
+    color: darkslategray;
+}
+
+.social-auth-box{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0px 0px 20px;
+}
+.social-auth-box p{
+    font-size: 14px;
+}
+.social-btn{
+    margin: 5px 0rem;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 5px;
+    padding: 8px 10px;
+    width: 100%;
+    text-align: left;
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+    transition: all 0.3s ease-in;
+    font-size: 15px;
+}
+.social-btn:hover{
+    background-color: azure;
+    color: #000;
+}
+.login-box{
+    padding-left: 20px;
+    border-left: 1px solid rgba(0,0,0,0.2);
+}
+.login-box h4{
+    font-size: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+}
+
+.login-box form{
+    margin: 1rem 0rem;
+    padding-bottom: 3rem;
+}
+form label{
+    color: #b92b27;
+    font-weight: 500;
+    display: block;
+    font-size: 15px;
+}
+.form-custom{
+    padding: 5px;
+    font-size: 15px;
+    /* width: 100%; */
+    display: block;
+    transition: all 0.2s ease-in;
+    border: 1px solid #000;
+    outline: none;
+    margin-bottom: 1rem;
+}
+.form-custom:focus{
+    border: 1px solid blue;
+}
+.form-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.form-footer a{
+    font-size: 14px;
+}
+.theme-link{
+    color: grey;
+    text-decoration: none;
+    transition: all 0.2s ease-in;
+}
+.theme-link:hover{
+    text-decoration: underline;
+    color: grey;
+}
+.theme-btn{
+    background-color: #b92b27;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    padding: 5px 15px;
+    border: 1px solid #b92b27;
+    border-radius: 5px;
+}
+.login-card-footer{
+    text-align: center;
+    padding: 10px 0px;
+    border-top: 1px solid rgba(0,0,0,0.2);
+}
+
+
+/* header styling */
+header{
+    background-color: #fff;
+}
+nav{
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.nav-wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left{
+    flex: 0 0 10%;
+}
+.nav-center{
+    flex: 0 0 55%;
+    display: flex;
+    justify-content: space-between;
+}
+.nav-center input{
+    margin-bottom: 0;
+}
+.nav-right{
+    flex: 0 0 20%;
+}
+
+.nav-left .nav-logo{
+    color: #b92b27;
+    font-size: 30px;
+    font-weight: 600;
+}
+.nav-center ul{
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0rem;
+}
+.nav-center ul li{
+    display: inline-block;
+    padding: 5px;
+    /* font-size: 20px; */
+    transition: all 0.2s ease-in;
+    margin: 0px 10px;
+}
+.nav-center ul li:hover{
+    background-color: antiquewhite;
+}
+.nav-center ul li a{
+    text-decoration: none;
+    color: grey;
+    transition: all 0.2s ease-in;
+}
+.nav-center ul li a:hover{
+    text-decoration: none;
+}
+
+.nav-center ul li a i{
+    font-size: 28px;
+}
+
+
+
+/* profile page styling */
+
+.profile-box{
+    margin-top: 2rem;
+}
+.profile-container{
+    display: flex;
+
+}
+.profile-image{
+    flex: 0 0 30%;
+}
+.profile-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.profile-details{
+    padding-top: 20px;
+}
+.profile-details h2{
+    font-size: 24px;
+}
+.profile-details p{
+    font-size: 15px;
+    color: gray;
+    margin-bottom: 5px;
+}   
+.about{
+    padding: 0px 20px;
+}
+.about p{
+    font-size: 15px;
+    color: grey;
+}
+.right-sidebar-header{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.right-sidebar h4{
+    font-size: 18px;
+}
+.right-sidebar i{
+    font-size: 18px;
+    color: grey;
+}
+.right-sidebar-list{
+    margin: 1rem 0rem;
+}
+.right-sidebar-item{
+    display: flex;
+    align-items: center;
+    margin: 5px 0px;
+}
+.right-sidebar-item p{
+    font-size: 15px;
+    color: grey;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+.right-sidebar-item p:hover{
+    text-decoration: underline;
+}
+
+.right-sidebar-item i{
+    color: lightskyblue;
+    font-size: 15px;
+}
+
+
+/* main page styling */
+.theme-bg{
+    background-color: #f1f2f2;
+}
+
+.question-card{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.question-card-header{
+    display: flex;
+}
+.user-title{
+    display: flex;
+    align-items: center;
+}
+.user-title h5{
+    font-size: 15px;
+    margin-bottom: 0;
+    font-weight: 600;
+    margin-right: 8px;
+}
+.user-title a{
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s ease-in;
+}
+.user-title a:hover{
+    text-decoration: underline;
+}
+.user-credential{
+    font-size: 14px;
+    color: grey;
+}
+.question-card-body p{
+    font-weight: 600;
+}
+.question-card-footer{
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer-options{
+    display: flex;
+    align-items: center;
+}
+.vote{
+    display: flex;
+}
+.upvote{
+    padding: 5px 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-right: none;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    color: blue;
+    cursor: pointer;
+}
+.downvote{
+    padding: 5px 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    cursor: pointer;
+    color: red;
+}
+.vote-center{
+    border: 1px solid rgba(0,0,0,0.2);
+    border-left: none;
+    border-right: none;
+    font-size: 13px;
+    padding: 5px 8px 5px 5px;
+    cursor: pointer;
+}
+
+
+/* question page styling */
+.question-details-card{
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 1rem;
+}
+.question-details-card h2{
+    font-size: 20px;
+    font-weight: 700;
+}
+.question-details-options{
+    /* margin-top: 1.5rem; */
+    display: flex;
+    align-items: center;
+}
+.theme-button-light{
+    padding: 8px 14px;
+    background-color: #fff;
+    transition: all 0.2s ease-in;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    color: gray;
+    border-radius: 5px;
+}
+.theme-button-light:hover{
+    background-color: #f1f2f2;
+    color: grey;
+}
+.theme-button-light.active{
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.related-question-box{
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 1rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin: 1rem;
+}
+.related-question-box h4{
+    padding-bottom: 8px;
+    font-size: 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+.question-list p{
+    margin-bottom: 5px;
+}
+
+.comment-form{
+    display: flex;
+    align-items: center;
+}
+
+.comment-form .form-custom{
+    margin-bottom: 0rem;
+}
+.theme-btn-icon{
+    font-size: 16px;
+    background-color: #96b4ff;
+    border: none;
+    padding: 5px 10px;
+    border: 1px solid black;
+    color: #fff;
+}
+.comment-item{
+    display: flex;
+    margin: 0.5rem;
+}
+.comment-user-details{
+    margin-left: 5px;
+}
+.comment-user-title{
+    display: flex;
+    align-items: center;
+}
+.comment-user-title h5{
+    font-size: 15px;
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+.comment-user-title span{
+    margin-left: 5px;
+    font-size: 13px;
+    color: grey;
+}
+
+.question-page .question-details-card{
+    margin: 0;
+}
+
+.question-page-heading{
+    border: 1px solid rgba(0,0,0,0.2);
+    background-color: #fff;
+    margin-top: 1rem;
+    display: flex;
+    align-content: center;
+    padding: 5px 10px;
+}
+.question-page-heading h2{
+    font-size: 15px;
+    margin-bottom: 0;
+}
+.question-page-heading i{
+    font-size: 16px;
+    color: #b92b27;
+    margin-right: 10px;
+}
+
+.question-info{
+    display: flex;
+    margin:0.5rem 0rem;
+}
+.question-info span:first-child{
+    font-weight: 500;
+    font-size: 14px;
+    color: grey;
+}
+.question-info span:last-child{
+    margin-left: 10px;
+    font-size: 13px;
+    color: grey;
+}
