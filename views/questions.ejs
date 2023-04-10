@@ -1,0 +1,107 @@
+<main>
+    <div class="container question-page">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="question-page-heading">
+                    <i class="fa-solid fa-star"></i> <h2>Questions For You</h2>
+                </div>
+                <% if(questions.length == 0){ %>
+                    <h2>No Question Found!</h2>    
+                <% } %>
+
+                <% for(let i of questions){ %>
+                <div class="question-details-card">
+                    <a href="/question/view/<%= i._id %>">
+                        <h2><%= i.content %></h2>
+                    </a>
+                    <div class="question-info">
+                        <span>
+                            <% if(i.answers.length > 0){ %>
+                                
+                                <%= i.answers.length %> Answers
+                            <% }else{ %>
+                                  No Answers Yet                                                  
+                                
+                            <% } %>
+
+                        </span>
+                        <span><%= i.created_at %></span>
+                    </div>
+                    <div class="question-details-options">
+                        <a href="" class="theme-button-light rounded-pill active answer" data-bs-toggle="modal" data-bs-target="#answer" data-id="<%= i._id %>"><i
+                                class="fa-regular fa-pen-to-square"></i> Answer</a>
+                        <a href="#" class="theme-button-light rounded-pill ms-3"><i class="fa-solid fa-wifi"></i>
+                            Follow</a>
+                        <div class="vote ms-3">
+                            <div class="upvote">
+                                <i class="fa-solid fa-caret-up"></i>
+                            </div>
+                            <div class="vote-center">
+                                Upvote-34
+                            </div>
+                            <div class="downvote">
+                                <i class="fa-solid fa-caret-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+               
+                
+
+            </div>
+            <div class="col-md-5">
+                <div class="related-question-box">
+                    <h4>Related Questions</h4>
+                    <div class="question-list">
+                        <a href="#" class="theme-link">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        </a>
+                        <a href="#" class="theme-link">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        </a>
+                        <a href="#" class="theme-link">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        </a>
+                        <a href="#" class="theme-link">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+ <!-- for answer the question -->
+ <div class="modal fade" id="answer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+ aria-labelledby="staticBackdropLabel" aria-hidden="true">
+ <div class="modal-dialog modal-dialog-centered">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h1 class="modal-title fs-5" id="staticBackdropLabel">Answer</h1>
+             <button type="button" class="btn-close" data-bs-dismiss="modal"
+                 aria-label="Close"></button>
+         </div>
+         <form action="/question/answer" method="POST">
+             <div class="modal-body">
+                 <div class="form-group">
+                     <label for="about">Write Your Answer.</label>
+                     <input type="hidden" id="question_id" name="question"
+                         value="">
+                     <textarea id="about" rows="10" resize="no-resize" name="answer"
+                         class="form-custom w-100" placeholder="Write Your Answer..."></textarea>
+                 </div>
+
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary"
+                     data-bs-dismiss="modal">Close</button>
+                 <button type="submit" class="theme-btn">Publish</button>
+             </div>
+         </form>
+     </div>
+ </div>
+</div>

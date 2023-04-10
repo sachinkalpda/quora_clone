@@ -287,6 +287,11 @@ nav{
     font-weight: 600;
     margin-right: 8px;
 }
+.user-title span{
+    margin-left: 5px;
+    font-size: 13px;
+    color: grey;
+}
 .user-title a{
     font-size: 14px;
     text-decoration: none;
@@ -350,6 +355,14 @@ nav{
     border: 1px solid rgba(0,0,0,0.2);
     margin: 1rem;
 }
+.question-details-card a{
+    text-decoration: none;
+    color: #000;
+    transition: all 0.2s ease-in;
+}
+.question-details-card a:hover{
+    text-decoration: underline;
+}
 .question-details-card h2{
     font-size: 20px;
     font-weight: 700;
@@ -392,7 +405,9 @@ nav{
 .question-list p{
     margin-bottom: 5px;
 }
-
+.comment-box{
+    display: none;
+}
 .comment-form{
     display: flex;
     align-items: center;
@@ -424,6 +439,11 @@ nav{
     font-size: 15px;
     margin-bottom: 0px;
     font-weight: 600;
+}
+.comment-user-title a{
+    font-size: 13px;
+    margin-left: 10px;
+    color: #b92b27;
 }
 .comment-user-title span{
     margin-left: 5px;

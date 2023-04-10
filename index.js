@@ -2,6 +2,9 @@ const express = require('express');
 const port = 8000;
 const app = express();
 
+var moment = require('moment');
+app.locals.moment = require('moment');
+
 // for database
 const db = require('./config/mongoose');
 const expressLayout = require('express-ejs-layouts');
