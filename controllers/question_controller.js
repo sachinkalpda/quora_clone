@@ -20,7 +20,7 @@ module.exports.add = async function (req, res) {
 
 module.exports.all = async function (req, res) {
     try {
-        let questions = await Question.find({ user: { $nin: req.user.id } }).populate('user');
+        let questions = await Question.find({ user: { $nin: req.user.id } }).populate('user').populate('upvotes');
         return res.render('questions', {
             questions: questions,
         });
@@ -48,7 +48,7 @@ module.exports.answer = async function (req, res) {
             req.flash('success','Answer Updated!');
             return res.redirect('back');
         } else {
-            if (question) {
+            if (question) { 
                 let answer = await Answer.create({
                     content: req.body.answer,
                     user: req.user._id,
@@ -92,7 +92,7 @@ module.exports.view = async function (req, res) {
                     },
                 }
             }).populate('upvotes');
-        // console.log(question);
+            console.log(question.answers[0].user)
         if (question) {
             return res.render('question', {
                 question: question

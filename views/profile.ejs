@@ -1,0 +1,175 @@
+<main>
+    <div class="container-lg profile-box">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="profile-container">
+
+                    <div class="profile-image">
+                        <img src="<%= userInfo.avatar %>" class="" height="200px" width="200px">
+                    </div>
+
+                    <div class="profile-details">
+                        <h2><%= userInfo.name %></h2>
+                        <p>
+                            <% if(userInfo.profession){ %>
+                                <%= userInfo.profession %>
+                            <%}else{ %>
+                                Add Your Profession...
+                            <%} %>
+                        </p>
+                        <p>0 Followers - 0 Following</p>
+                    </div>
+                </div>
+                <div class="about">
+                    <p>
+                        <% if(userInfo.about){ %>
+                            <%= userInfo.about %>
+                        <%}else{ %>
+                            Write About Yourself...
+                        <%} %>
+                </p>
+                </div>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                            data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                            aria-selected="true">Profile</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                            data-bs-target="#profile-tab-pane" type="button" role="tab"
+                            aria-controls="profile-tab-pane" aria-selected="false">Answers</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+                            data-bs-target="#contact-tab-pane" type="button" role="tab"
+                            aria-controls="contact-tab-pane" aria-selected="false">Questions</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
+                            data-bs-target="#disabled-tab-pane" type="button" role="tab"
+                            aria-controls="disabled-tab-pane" aria-selected="false">Posts</button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                        aria-labelledby="home-tab" tabindex="0">...</div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                        tabindex="0">...</div>
+                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
+                        tabindex="0">...</div>
+                    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab"
+                        tabindex="0">...</div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="right-sidebar">
+                    <div class="right-sidebar-header">
+                        <h4>Update Profile Credential</h4>
+                        <i class="fa-solid fa-pencil"></i>
+                    </div>
+                    <div class="right-sidebar-list">
+                        <div class="right-sidebar-item"><i class="fa-solid fa-user-graduate"></i>
+                            <p data-bs-toggle="modal" data-bs-target="#updateAbout">Write About Yourself</p>
+                        </div>
+                        <div class="right-sidebar-item"><i class="fa-solid fa-list"></i>
+                            <p data-bs-toggle="modal" data-bs-target="#updateProfile"> Add Profile Credential</p>
+                        </div>
+                        <div class="right-sidebar-item"><i class="fa-solid fa-user"></i>
+                            <p data-bs-toggle="modal" data-bs-target="#updateImage"> Add Profile Image</p>
+                        </div>
+                        <div class="right-sidebar-item"><i class="fa-solid fa-briefcase"></i>
+                            <p>Joined On <%= moment(userInfo.createdAt).format('ll');  %></p>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- for update about info -->
+<div class="modal fade" id="updateAbout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">About</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/user/profile/about" method="POST">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="about">About</label>
+                        <textarea id="about" rows="10" resize="no-resize" name="about" class="form-custom w-100"
+                            placeholder="Write About Yourself"><%=userInfo.about %></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="theme-btn">Update Bio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- for update prfile credential -->
+<div class="modal fade" id="updateProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Profession</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/user/profile/profession" method="POST">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="profile">Add Profession</label>
+                        <input type="text" id="profile" name="profession" class="form-custom w-100"
+                            placeholder="Write About Working" value="<%=userInfo.profession %>" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="theme-btn">Update Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- for update profile image -->
+
+<div class="modal fade" id="updateImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Profile Image</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/user/profile/avatar" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="image">Add Image</label>
+                        <input type="file" id="image" name="avatar" class="form-custom w-100" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="theme-btn">Add Image</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

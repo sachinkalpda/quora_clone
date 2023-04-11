@@ -25,24 +25,30 @@
                             <% } %>
 
                         </span>
-                        <span><%= i.created_at %></span>
+                        <span><%= moment(i.createdAt).fromNow() %></span>
                     </div>
                     <div class="question-details-options">
                         <a href="" class="theme-button-light rounded-pill active answer" data-bs-toggle="modal" data-bs-target="#answer" data-id="<%= i._id %>"><i
                                 class="fa-regular fa-pen-to-square"></i> Answer</a>
                         <a href="#" class="theme-button-light rounded-pill ms-3"><i class="fa-solid fa-wifi"></i>
                             Follow</a>
-                        <div class="vote ms-3">
-                            <div class="upvote">
-                                <i class="fa-solid fa-caret-up"></i>
+                            <div class="vote ms-3">
+                                <a href="/upvote/toggle/?id=<%= i.id %>&type=Question" class="d-flex upvote-link">
+                                    <div class="upvote">
+                                        <i class="fa-solid fa-caret-up"></i>
+                                    </div>
+                                    <div class="vote-center">
+                                        Upvote-<span>
+                                            <%= i.upvotes.length %>
+                                        </span>
+                                    </div>
+                                </a>
+                                <a href="/downvote/toggle/?id=<%= i.id %>&type=Question">
+                                    <div class="downvote">
+                                        <i class="fa-solid fa-caret-down"></i>
+                                    </div>
+                                </a>
                             </div>
-                            <div class="vote-center">
-                                Upvote-34
-                            </div>
-                            <div class="downvote">
-                                <i class="fa-solid fa-caret-down"></i>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <% } %>

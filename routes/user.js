@@ -18,6 +18,11 @@ router.post('/create-session',passport.authenticate(
 
 router.get('/logout',userController.destroySession);
 
+router.get('/profile',passport.checkAuthentication,userController.viewProfile);
+router.post('/profile/about',passport.checkAuthentication,userController.updateAbout);
+router.post('/profile/profession',passport.checkAuthentication,userController.updateProfession);
+router.post('/profile/avatar',passport.checkAuthentication,userController.updateAvatar);
+
 
 
 module.exports = router;

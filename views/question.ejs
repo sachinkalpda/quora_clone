@@ -4,17 +4,22 @@
             <div class="col-md-7">
 
                 <div class="question-details-card">
-                    <h2><%= question.content %></h2>
+                    <h2>
+                        <%= question.content %>
+                    </h2>
                     <div class="question-details-options">
-                        <a href="" class="theme-button-light rounded-pill active answer" data-bs-toggle="modal" data-bs-target="#answer" data-id="<%= question._id %>"><i
-                                class="fa-regular fa-pen-to-square"></i> 
-                                <% let users = question.answers.filter(function(value){ return value.user.id==locals.user.id;}) %>
-                                <% if(users.length == 0){ %>
+                        <a href="" class="theme-button-light rounded-pill active answer" data-bs-toggle="modal"
+                            data-bs-target="#answer" data-id="<%= question._id %>"><i
+                                class="fa-regular fa-pen-to-square"></i>
+                            <% let users=question.answers.filter(function(value){ return
+                                value.user.id==locals.user.id;}) %>
+                                
+                                <% if(users.length==0){ %>
                                     Answer
-                                <%}else{ %>
-                                    Edit Answer
-                                <% } %>
-                            </a>
+                                    <%}else{ %>
+                                        Edit Answer
+                                        <% } %>
+                        </a>
                         <a href="#" class="theme-button-light rounded-pill ms-3"><i class="fa-solid fa-wifi"></i>
                             Follow</a>
                         <div class="vote ms-3">
@@ -23,92 +28,113 @@
                                     <i class="fa-solid fa-caret-up"></i>
                                 </div>
                                 <div class="vote-center">
-                                    Upvote-<span><%= question.upvotes.length %></span>
+                                    Upvote-<span>
+                                        <%= question.upvotes.length %>
+                                    </span>
                                 </div>
                             </a>
-                            <div class="downvote">
-                                <i class="fa-solid fa-caret-down"></i>
-                            </div>
+                            <a href="/downvote/toggle/?id=<%= question.id %>&type=Question" class="downvote-link">
+                                <div class="downvote">
+                                    <i class="fa-solid fa-caret-down"></i>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
                 <p class="small-heading ms-3">Answers(<%= question.answers.length %>)</p>
                 <% for(let i of question.answers){ %>
-                    
-                <div class="question-card">
-                    <div class="question-card-header">
-                        <div class="user-image">
-                            <img src="./images/user.jpg" class="rounded" height="50px" width="50px">
-                        </div>
-                        <div class="user-details ms-2">
-                            <div class="user-title">
-                                <h5><%= i.user.name %></h5>
-                                <a href="#">Follow</a>
-                                <span><%= moment(i.createdAt).fromNow() %></span>
-                            </div>
-                            <div class="user-credential">
-                                <p>Full Stack Developer</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="question-card-body">
-                        <p><%= i.content %></p>
-                    </div>
-                    <div class="question-card-footer">
-                        <div class="footer-options">
-                            <div class="vote">
-                                <a href="/upvote/toggle/?id=<%= i.id %>&type=Answer" class="d-flex upvote-link">
-                                    <div class="upvote">
-                                        <i class="fa-solid fa-caret-up"></i>
-                                    </div>
-                                    <div class="vote-center">
-                                        Upvote-<span><%= i.upvotes.length %></span>
-                                    </div>
-                                </a>
-                                <div class="downvote">
-                                    <i class="fa-solid fa-caret-down"></i>
-                                </div>
-                            </div>
 
-                            <div class="comments ms-3">
-                                <%= i.comments.length %> <i class="fa-regular fa-comment"></i>
+                    <div class="question-card">
+                        <div class="question-card-header">
+                            <div class="user-image">
+                                <img src="./images/user.jpg" class="rounded" height="50px" width="50px">
                             </div>
-                            <div class="answers ms-3">
-                                5 <i class="fa-solid fa-reply"></i>
+                            <div class="user-details ms-2">
+                                <div class="user-title">
+                                    <h5>
+                                        <%= i.user.name %>
+                                    </h5>
+                                    <a href="#">Follow</a>
+                                    <span>
+                                        <%= moment(i.createdAt).fromNow() %>
+                                    </span>
+                                </div>
+                                <div class="user-credential">
+                                    <p>Full Stack Developer</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="comment-box mt-2">
-                        <form action="/comment/add" class="comment-form" method="POST">
-                            <input type="hidden" name="answer_id" value="<%= i._id %>" /> 
-                            <input type="text" name="comment" class="form-custom w-100" placeholder="Enter Comment..">
-                            <button type="submit" class="theme-btn-icon"><i class="fa-regular fa-paper-plane"></i></button>
-                        </form>
-                        <% if(i.comments.length == 0){ %>
-                            <h6 class="mt-2">No Comments Yet!</h6>    
-                        <%} %>
-                        <% for(let comment of i.comments){ %>
-                            <div class="comment-list">
-                                <div class="comment-item">
-                                    <img src="./images/user.jpg" height="50px" width="50px" class="rounded">
-                                    <div class="comment-user-details">
-                                        <div class="comment-user-title">
-                                            <h5><%= comment.user.name %></h5>
-                                            <span><%= moment(comment.createdAt).fromNow() %></span>
-                                            <% if(locals.user.id == comment.user.id) { %>
-                                            <a href="/comment/delete/<%=comment.id %>"><i class="fa-regular fa-trash-can"></i></a>
-                                            <% } %>
+                        <div class="question-card-body">
+                            <p>
+                                <%= i.content %>
+                            </p>
+                        </div>
+                        <div class="question-card-footer">
+                            <div class="footer-options">
+                                <div class="vote">
+                                    <a href="/upvote/toggle/?id=<%= i.id %>&type=Answer" class="d-flex upvote-link">
+                                        <div class="upvote">
+                                            <i class="fa-solid fa-caret-up"></i>
                                         </div>
-                                        <p class="comment">
-                                            <%= comment.content %>
-                                        </p>
-                                    </div>
+                                        <div class="vote-center">
+                                            Upvote-<span>
+                                                <%= i.upvotes.length %>
+                                            </span>
+                                        </div>
+                                    </a>
+                                    <a href="/downvote/toggle/?id=<%= i.id %>&type=Answer">
+                                        <div class="downvote">
+                                            <i class="fa-solid fa-caret-down"></i>
+                                        </div>
+                                    </a>
                                 </div>
-                            </div>  
-                        <% } %>
+
+                                <div class="comments ms-3">
+                                    <%= i.comments.length %> <i class="fa-regular fa-comment"></i>
+                                </div>
+                                <div class="answers ms-3">
+                                    5 <i class="fa-solid fa-reply"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-box mt-2">
+                            <form action="/comment/add" class="comment-form" method="POST">
+                                <input type="hidden" name="answer_id" value="<%= i._id %>" />
+                                <input type="text" name="comment" class="form-custom w-100"
+                                    placeholder="Enter Comment..">
+                                <button type="submit" class="theme-btn-icon"><i
+                                        class="fa-regular fa-paper-plane"></i></button>
+                            </form>
+                            <% if(i.comments.length==0){ %>
+                                <h6 class="mt-2">No Comments Yet!</h6>
+                                <%} %>
+                                    <% for(let comment of i.comments){ %>
+                                        <div class="comment-list">
+                                            <div class="comment-item">
+                                                <img src="./images/user.jpg" height="50px" width="50px" class="rounded">
+                                                <div class="comment-user-details">
+                                                    <div class="comment-user-title">
+                                                        <h5>
+                                                            <%= comment.user.name %>
+                                                        </h5>
+                                                        <span>
+                                                            <%= moment(comment.createdAt).fromNow() %>
+                                                        </span>
+                                                        <% if(locals.user.id==comment.user.id) { %>
+                                                            <a href="/comment/delete/<%=comment.id %>"><i
+                                                                    class="fa-regular fa-trash-can"></i></a>
+                                                            <% } %>
+                                                    </div>
+                                                    <p class="comment">
+                                                        <%= comment.content %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                        </div>
                     </div>
-                </div>
-                <%} %>
+                    <%} %>
 
 
             </div>
@@ -136,33 +162,30 @@
 </main>
 
 
- <!-- for answer the question -->
- <div class="modal fade" id="answer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
- aria-labelledby="staticBackdropLabel" aria-hidden="true">
- <div class="modal-dialog modal-dialog-centered">
-     <div class="modal-content">
-         <div class="modal-header">
-             <h1 class="modal-title fs-5" id="staticBackdropLabel">Answer</h1>
-             <button type="button" class="btn-close" data-bs-dismiss="modal"
-                 aria-label="Close"></button>
-         </div>
-         <form action="/question/answer" method="POST">
-             <div class="modal-body">
-                 <div class="form-group">
-                     <label for="about">Write Your Answer.</label>
-                     <input type="hidden" id="question_id" name="question"
-                         value="">
-                     <textarea id="about" rows="10" resize="no-resize" name="answer"
-                         class="form-custom w-100" placeholder="Write Your Answer..."><% if(users.length>0){%><%= users[0].content %><%} %></textarea>
-                 </div>
+<!-- for answer the question -->
+<div class="modal fade" id="answer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Answer</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/question/answer" method="POST">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="about">Write Your Answer.</label>
+                        <input type="hidden" id="question_id" name="question" value="">
+                        <textarea id="about" rows="10" resize="no-resize" name="answer" class="form-custom w-100"
+                            placeholder="Write Your Answer..."><% if(users.length>0){%><%= users[0].content %><%} %></textarea>
+                    </div>
 
-             </div>
-             <div class="modal-footer">
-                 <button type="button" class="btn btn-secondary"
-                     data-bs-dismiss="modal">Close</button>
-                 <button type="submit" class="theme-btn">Publish</button>
-             </div>
-         </form>
-     </div>
- </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="theme-btn">Publish</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
