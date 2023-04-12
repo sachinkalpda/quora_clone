@@ -22,7 +22,7 @@ router.get('/profile',passport.checkAuthentication,userController.viewProfile);
 router.post('/profile/about',passport.checkAuthentication,userController.updateAbout);
 router.post('/profile/profession',passport.checkAuthentication,userController.updateProfession);
 router.post('/profile/avatar',passport.checkAuthentication,userController.updateAvatar);
-
+router.get('/follow/:id',passport.checkAuthentication,userController.follow);
 
 
 module.exports = router;

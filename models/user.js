@@ -27,7 +27,19 @@ const userSchema = mongoose.Schema({
     avatar : {
         type: String,
         default: "/uploads/user/avatar/user.jpg",
-    }
+    },
+    followers: [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'User',
+        }
+    ],
+    following: [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'User',
+        }
+    ],
 },{
     timestamps : true
 });

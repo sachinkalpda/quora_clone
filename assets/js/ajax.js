@@ -49,5 +49,28 @@ $(document).ready(function(){
     });
 
 
+    $('.follow-link').on('click',function(e){
+        e.preventDefault();
+        let self = this;
+        $.ajax({
+            type: 'get',
+            url : $(self).attr('href'),
+        }).done(function(data){
+            $(self).html('<i class="fa-solid fa-wifi"></i> '+data.message);
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+        })
+        .fail(function(err){
+            console.log("error in completing request");
+        });
+        
+    });
+
+
     
 }); 

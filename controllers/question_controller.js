@@ -80,6 +80,7 @@ module.exports.answer = async function (req, res) {
 module.exports.view = async function (req, res) {
     try {
         let question = await Question.findById(req.params.id)
+            .populate('user')
             .populate({
                 path: 'answers',
                 populate: {

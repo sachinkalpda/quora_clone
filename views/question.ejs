@@ -20,8 +20,14 @@
                                         Edit Answer
                                         <% } %>
                         </a>
-                        <a href="#" class="theme-button-light rounded-pill ms-3"><i class="fa-solid fa-wifi"></i>
-                            Follow</a>
+                        <a href="/user/follow/<%= question.user.id %>" class="theme-button-light rounded-pill ms-3 follow-link"><i class="fa-solid fa-wifi"></i>
+                            <% let follow=locals.user.following.find(value => 
+                                value.id==question.user.id) %>
+                                <% if(follow){ %>
+                                    Following
+                                    <%}else{ %>
+                                        Follow
+                                        <% } %> </a>
                         <div class="vote ms-3">
                             <a href="/upvote/toggle/?id=<%= question.id %>&type=Question" class="d-flex upvote-link">
                                 <div class="upvote">

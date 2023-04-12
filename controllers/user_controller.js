@@ -126,3 +126,42 @@ module.exports.updateAvatar = async function(req,res){
         
     }
 }
+
+module.exports.follow = async function(req,res){
+    try {
+        let loggedUser = await User.findById(req.user.id);
+
+        let user = await User.findById(req.params.id).populate('followers following');
+        if(user){
+            let follwingExist = user.followers.find(i => i.id == loggedUser.id);
+            // console.log(follwingEx);
+            if(follwingExist){
+                user.followers.pull(loggedUser._id);
+                await user.save();
+                loggedUser.following.pull(user._id);
+                await loggedUser.save();
+                return res.json(200,{
+                    'message' : 'Follow',
+                });
+            }else{
+                user.followers.push(loggedUser._id);
+                await user.save();
+                loggedUser.following.push(user._id);
+                await loggedUser.save();
+                return res.json(200,{
+                    'message' : 'Following',
+                });
+
+            }
+        }else{
+            return res.json(500,{
+                'error' : 'Internal Server Error',
+            });
+        }
+
+        
+    } catch (err) {
+        console.log('Error user',err);
+        
+    }
+}
