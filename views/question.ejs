@@ -11,18 +11,19 @@
                         <a href="" class="theme-button-light rounded-pill active answer" data-bs-toggle="modal"
                             data-bs-target="#answer" data-id="<%= question._id %>"><i
                                 class="fa-regular fa-pen-to-square"></i>
-                            <% let users=question.answers.filter(function(value){ return
-                                value.user.id==locals.user.id;}) %>
-                                
-                                <% if(users.length==0){ %>
-                                    Answer
+                            <% let users=answers.some(function(obj){ return
+                                obj.user._id===locals.user_id;}) %>
+                                <%= users %>
+                                <% if(users){ %>
+                                    Edit Answer
                                     <%}else{ %>
-                                        Edit Answer
+                                        Answer
                                         <% } %>
                         </a>
                         <a href="/user/follow/<%= question.user.id %>" class="theme-button-light rounded-pill ms-3 follow-link"><i class="fa-solid fa-wifi"></i>
-                            <% let follow=locals.user.following.find(value => 
-                                value.id==question.user.id) %>
+                            <% let follow=locals.user.following.some(function(obj){
+                                return obj==question.user.id
+                            } ) %>
                                 <% if(follow){ %>
                                     Following
                                     <%}else{ %>
@@ -47,26 +48,38 @@
                         </div>
                     </div>
                 </div>
-                <p class="small-heading ms-3">Answers(<%= question.answers.length %>)</p>
-                <% for(let i of question.answers){ %>
+                <p class="small-heading ms-3">Answers(<%= answers.length %>)</p>
+                <% for(let i of answers){ %>
 
                     <div class="question-card">
                         <div class="question-card-header">
                             <div class="user-image">
-                                <img src="./images/user.jpg" class="rounded" height="50px" width="50px">
+                                <img src="<%= i.user.avatar %>" class="rounded" height="50px" width="50px">
                             </div>
                             <div class="user-details ms-2">
                                 <div class="user-title">
                                     <h5>
                                         <%= i.user.name %>
                                     </h5>
-                                    <a href="#">Follow</a>
+                                    <a href="/user/follow/<%= i.user.id %>" class="follow-link"><i class="fa-solid fa-wifi"></i>
+                                        <% let follow=locals.user.following.some(function(obj){
+                                            return obj==i.user.id
+                                        } ) %>
+                                            <% if(follow){ %>
+                                                Following
+                                                <%}else{ %>
+                                                    Follow
+                                                    <% } %> </a>
                                     <span>
                                         <%= moment(i.createdAt).fromNow() %>
                                     </span>
                                 </div>
                                 <div class="user-credential">
-                                    <p>Full Stack Developer</p>
+                                    <p><% if(!i.user.profession){ %>
+                                        N/A
+                                    <%}else { %>
+                                        <%= i.user.profession %> 
+                                    <%} %></p>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +130,7 @@
                                     <% for(let comment of i.comments){ %>
                                         <div class="comment-list">
                                             <div class="comment-item">
-                                                <img src="./images/user.jpg" height="50px" width="50px" class="rounded">
+                                                <img src="<%= comment.user.avatar %>" height="50px" width="50px" class="rounded">
                                                 <div class="comment-user-details">
                                                     <div class="comment-user-title">
                                                         <h5>
@@ -183,7 +196,7 @@
                         <label for="about">Write Your Answer.</label>
                         <input type="hidden" id="question_id" name="question" value="">
                         <textarea id="about" rows="10" resize="no-resize" name="answer" class="form-custom w-100"
-                            placeholder="Write Your Answer..."><% if(users.length>0){%><%= users[0].content %><%} %></textarea>
+                            placeholder="Write Your Answer..."><% if(users){%><%= users.content %><%} %></textarea>
                     </div>
 
                 </div>

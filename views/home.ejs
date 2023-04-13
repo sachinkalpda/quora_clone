@@ -1,56 +1,99 @@
 <main>
     <div class="container main-page">
         <div class="row">
-            <div class="col-md-2"></div>
-            <div class="col-md-7">
-
+            <div class="col-md-8">
+                <% if(questions.length == 0){ %>
+                    <h4 class="mt-3">No Data Found!</h4>
+                <%} %>
+                <% for(let question of questions){ %>
                 <div class="question-card">
                     <div class="question-card-header">
                         <div class="user-image">
-                            <img src="./images/user.jpg" class="rounded" height="50px" width="50px">
+                            <img src="<%= question.user.avatar %>" class="rounded" height="50px" width="50px">
                         </div>
                         <div class="user-details ms-2">
                             <div class="user-title">
-                                <h5>Username</h5>
-                                <a href="#">Follow</a>
+                                <h5><%= question.user.name %></h5>
+                                <a href="/user/follow/<%= question.user.id %>" class="theme-button-light rounded-pill ms-3 follow-link"><i class="fa-solid fa-wifi"></i>
+                                    <% let follow=locals.user.following.some(function(obj){
+                                        return obj==question.user.id
+                                    } ) %>
+                                        <% if(follow){ %>
+                                            Following
+                                            <%}else{ %>
+                                                Follow
+                                                <% } %> </a>
                             </div>
                             <div class="user-credential">
-                                <p>Full Stack Developer</p>
+                                <p><%= question.user.profession %></p>
                             </div>
                         </div>
                     </div>
+                    <div class="question-info">
+                        <span>
+                            <% if(question.answers.length > 0){ %>
+                                
+                                <%= question.answers.length %> Answers
+                            <% }else{ %>
+                                  No Answers Yet                                                  
+                                
+                            <% } %>
+
+                        </span>
+                        <span><%= moment(question.createdAt).fromNow() %></span>
+                    </div>
                     <div class="question-card-body">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, quibusdam fuga labore
-                            facere asperiores quos quas recusandae corrupti. Voluptatibus inventore eum libero
-                            numquam!?</p>
+                        <p><%= question.content %></p>
                     </div>
                     <div class="question-card-footer">
                         <div class="footer-options">
                             <div class="vote">
-                                <div class="upvote">
-                                    <i class="fa-solid fa-caret-up"></i>
-                                </div>
-                                <div class="vote-center">
-                                    Upvote-34
-                                </div>
-                                <div class="downvote">
-                                    <i class="fa-solid fa-caret-down"></i>
-                                </div>
+                                <a href="/upvote/toggle/?id=<%= question.id %>&type=Question" class="d-flex upvote-link">
+                                    <div class="upvote">
+                                        <i class="fa-solid fa-caret-up"></i>
+                                    </div>
+                                    <div class="vote-center">
+                                        Upvote-<span>
+                                            <%= question.upvotes.length %>
+                                        </span>
+                                    </div>
+                                </a>
+                                <a href="/downvote/toggle/?id=<%= question.id %>&type=Question" class="downvote-link">
+                                    <div class="downvote">
+                                        <i class="fa-solid fa-caret-down"></i>
+                                    </div>
+                                </a>
                             </div>
 
                             <div class="comments ms-3">
-                                5 <i class="fa-regular fa-comment"></i>
+                                <%= question.answers.length %> <i class="fa-regular fa-comment"></i>
                             </div>
                             <div class="answers ms-3">
-                                5 <i class="fa-solid fa-reply"></i>
+                                <%= question.answers.length %> <i class="fa-solid fa-reply"></i>
                             </div>
                         </div>
-                        <a href="#" class="theme-link">Read More..</a>
+                        <a href="/question/view/<%= question._id %>" class="theme-link">Read More..</a>
                     </div>
                 </div>
+                <%} %>
+
 
             </div>
-            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <div class="related-question-box">
+                    <h4>Topics</h4>
+                    <div class="question-list">
+                        <% if(locals.user.interests.length == 0) { %>
+                            <h4>No Topic Found!</h4>
+                        <%} %>
+                        <% for(let topic of locals.user.interests){ %>
+                        <a href="#" class="theme-link">
+                            <p><%= topic.name %></p>
+                        </a>
+                        <%} %>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </main>

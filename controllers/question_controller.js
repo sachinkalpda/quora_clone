@@ -1,16 +1,26 @@
 const Question = require('../models/question');
 const Answer = require('../models/answer');
+const Topic = require('../models/topic');
 
 module.exports.add = async function (req, res) {
 
 
     try {
-        const question = await Question.create({
-            content: req.body.question,
-            user: req.user.id
-        });
-        req.flash('success', 'Question Added to feed');
-        return res.redirect('back');
+        console.log(req.body.topic);
+        let topic = await Topic.findById(req.body.topic);
+        if(topic){
+            const question = await Question.create({
+                content: req.body.question,
+                user: req.user.id,
+                topic : req.body.topic,
+            });
+            req.flash('success', 'Question Added to feed');
+            return res.redirect('back');
+        }else{
+            req.flash('error','Invalid Topic');
+            return res.redirect('back');
+        }
+        
     } catch (err) {
         console.log('Error Question', err);
         return;
@@ -79,24 +89,20 @@ module.exports.answer = async function (req, res) {
 
 module.exports.view = async function (req, res) {
     try {
-        let question = await Question.findById(req.params.id)
+        let question = await Question.findById(req.params.id).populate('user').populate('upvotes');
+        let answers = await Answer.find({question : question.id})
             .populate('user')
             .populate({
-                path: 'answers',
+                path: 'comments',
                 populate: {
                     path: 'user',
-                },
-                populate : {
-                    path : 'comments',
-                    populate : {
-                        path : 'user',
-                    },
-                }
+                }                
             }).populate('upvotes');
-            console.log(question.answers[0].user)
+            // console.log(answers);
         if (question) {
             return res.render('question', {
-                question: question
+                question: question,
+                answers : answers
             });
         } else {
             req.flash('error', 'Invalid Question');

@@ -24,5 +24,10 @@ router.post('/profile/profession',passport.checkAuthentication,userController.up
 router.post('/profile/avatar',passport.checkAuthentication,userController.updateAvatar);
 router.get('/follow/:id',passport.checkAuthentication,userController.follow);
 
+router.post('/interest/add',passport.checkAuthentication,userController.addInterest);
+router.get('/interest/remove/:id',passport.checkAuthentication,userController.removeInterest);
+
+router.get('/verify/:token',userController.verifyAccount);
+
 
 module.exports = router;

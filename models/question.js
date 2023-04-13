@@ -10,6 +10,10 @@ const questionSchema = mongoose.Schema({
         type : mongoose.Schema.Types.ObjectId,
         ref : 'User'
     },
+    topic : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref : 'Topic',
+    },
     answers : [
         {
             type: mongoose.Schema.Types.ObjectId,

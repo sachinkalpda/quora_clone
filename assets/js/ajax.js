@@ -72,5 +72,35 @@ $(document).ready(function(){
     });
 
 
+    $('.addTopic').on('click',function(){
+        let topicElement = $('#topic');
+        topicElement.html('<option value="hidden" hidden>Select option</option>')
+        $.ajax({
+            type: 'get',
+            url : '/topic/all',
+        }).done(function(data){
+            console.log(data);
+            // $(self).html('<i class="fa-solid fa-wifi"></i> '+data.message);
+            if(data.topics.length == 0){
+                topicElement.append('<option value="">No Data Found</option>');
+            }
+            for(let topic of data.topics){
+                topicElement.append('<option value="'+topic._id+'">'+topic.name+'</option>')
+            }
+            
+            new Noty({
+                theme: 'relax',
+                text: data.message,
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+        })
+        .fail(function(err){
+            console.log("error in completing request");
+        });
+    }); 
+
+
     
 }); 

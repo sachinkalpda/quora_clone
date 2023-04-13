@@ -15,5 +15,6 @@ router.use('/question',require('./question'));
 router.use('/comment',require('./comment'));
 router.use('/upvote',require('./upvote'));
 router.use('/downvote',require('./downvote'));
+router.use('/topic',require('./topic'));
 
 module.exports = router;

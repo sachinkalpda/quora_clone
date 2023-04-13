@@ -9,25 +9,29 @@
                     </div>
 
                     <div class="profile-details">
-                        <h2><%= userInfo.name %></h2>
+                        <h2>
+                            <%= userInfo.name %>
+                        </h2>
                         <p>
                             <% if(userInfo.profession){ %>
                                 <%= userInfo.profession %>
-                            <%}else{ %>
-                                Add Your Profession...
-                            <%} %>
+                                    <%}else{ %>
+                                        Add Your Profession...
+                                        <%} %>
                         </p>
-                        <p><%= userInfo.followers.length %> Followers - <%= userInfo.following.length %> Following</p>
+                        <p>
+                            <%= userInfo.followers.length %> Followers - <%= userInfo.following.length %> Following
+                        </p>
                     </div>
                 </div>
                 <div class="about">
                     <p>
                         <% if(userInfo.about){ %>
                             <%= userInfo.about %>
-                        <%}else{ %>
-                            Write About Yourself...
-                        <%} %>
-                </p>
+                                <%}else{ %>
+                                    Write About Yourself...
+                                    <%} %>
+                    </p>
                 </div>
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -38,13 +42,13 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                            data-bs-target="#profile-tab-pane" type="button" role="tab"
-                            aria-controls="profile-tab-pane" aria-selected="false">Answers</button>
+                            data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
+                            aria-selected="false">Answers</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                            data-bs-target="#contact-tab-pane" type="button" role="tab"
-                            aria-controls="contact-tab-pane" aria-selected="false">Questions</button>
+                            data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
+                            aria-selected="false">Questions</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
@@ -53,8 +57,8 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
-                        aria-labelledby="home-tab" tabindex="0">...</div>
+                    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                        tabindex="0">...</div>
                     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                         tabindex="0">...</div>
                     <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
@@ -81,16 +85,105 @@
                             <p data-bs-toggle="modal" data-bs-target="#updateImage"> Add Profile Image</p>
                         </div>
                         <div class="right-sidebar-item"><i class="fa-solid fa-briefcase"></i>
-                            <p>Joined On <%= moment(userInfo.createdAt).format('ll');  %></p>
+                            <p>Joined On <%= moment(userInfo.createdAt).format('ll'); %>
+                            </p>
                         </div>
 
 
+                    </div>
+                </div>
+
+                <div class="right-sidebar mt-3">
+                    <div class="right-sidebar-header">
+                        <h4>Interests</h4>
+                        <i class="fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#addTopic"></i>
+                    </div>
+                    <div class="right-sidebar-list">
+                        <% if(userInfo.interests.length == 0){ %>
+                            <p>No Topic Found!. Add a new one. </p>    
+                        <%} %>
+                        <% for(let topic of userInfo.interests){ %>
+                        <div class="right-sidebar-item justify-content-between align-items-center">
+                            <p data-bs-toggle="modal" data-bs-target="#updateAbout"><%= topic.name %></p>
+                            <a href="/user/interest/remove/<%= topic.id %>"><i class="fa-solid fa-xmark"></i></a>
+                        </div>
+                            <% } %>
+
+                                <button data-bs-toggle="modal" data-bs-target="#addInterest"
+                                    class="theme-btn text-center mt-3">Add Topic</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
+
+
+<!-- for update prfile credential -->
+<div class="modal fade" id="addTopic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Topic</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/topic/add" method="POST">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="topicNew">Add Topic</label>
+                        <input type="text" id="topicNew" name="topic" class="form-custom w-100" placeholder="Add New Topic"
+                            value="" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="theme-btn">Add Topic</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Interest -->
+<div class="modal fade" id="addInterest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Interest</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/user/interest/add" method="POST">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="interest">Add Interest</label>
+                        <select id="interest" name="interest" class="form-custom w-100">
+                            <option value="hidden" hidden>Select An Option</option>
+                            <% for(let topic of topics){ %>
+                                <option value="<%= topic.id %>">
+                                    <%= topic.name %>
+                                </option>
+                                <%} %>
+
+                        </select>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="theme-btn">Save Interests</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- for update about info -->
 <div class="modal fade" id="updateAbout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">

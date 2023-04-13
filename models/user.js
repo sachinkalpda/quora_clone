@@ -28,6 +28,11 @@ const userSchema = mongoose.Schema({
         type: String,
         default: "/uploads/user/avatar/user.jpg",
     },
+    verify : {
+        type : Boolean,
+        required : true,
+        default : false
+    },
     followers: [
         {
             type : mongoose.Schema.Types.ObjectId,
@@ -40,6 +45,12 @@ const userSchema = mongoose.Schema({
             ref : 'User',
         }
     ],
+    interests : [
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            ref : 'Topic'
+        }
+    ]
 },{
     timestamps : true
 });

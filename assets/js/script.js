@@ -15,4 +15,7 @@ $(document).ready(function(){
         let commentBox = $(this).closest('.question-card-footer').next();
         commentBox.slideToggle();
     });
+
+
+    
 });

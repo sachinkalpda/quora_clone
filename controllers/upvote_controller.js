@@ -3,7 +3,6 @@ const Answer = require('../models/answer');
 const Upvote = require('../models/upvote');
 
 module.exports.toggle = async function (req, res) {
-    console.log(req.query);
     if (req.query.type == 'Question' || req.query.type == 'Answer') {
         try {
             let upvoteable;

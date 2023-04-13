@@ -2,7 +2,6 @@ const passport = require('passport');
 
 const LocalStrategy = require('passport-local').Strategy;
 
-
 const User = require('../models/user');
 
 
@@ -11,7 +10,8 @@ passport.use(new LocalStrategy({
         passReqToCallback : true,
     },async function(req,email,password,done){
         try {
-            let user = await User.findOne({email : email});
+            let user = await User.findOne({email : email,verify: true});
+            console.log(user);
             if(!user || user.password != password){
                 req.flash('error','Invalid Username/Password');
                 return done(null, false);
@@ -31,7 +31,7 @@ passport.serializeUser(function(user,done){
 
 passport.deserializeUser(async function(id,done){
     try {
-        const user = await User.findById(id);
+        const user = await User.findById(id).populate('interests');
         return done(null,user);
     } catch (err) {
         console.log("error in local strategy",err);
@@ -50,6 +50,7 @@ passport.checkAuthentication = function(req,res,next){
 
 
 passport.setAuthenticatedUser = function(req,res,next){
+
     if(req.isAuthenticated()){
         res.locals.user = req.user;
     }
