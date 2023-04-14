@@ -15,6 +15,7 @@ const MongoStore = require('connect-mongo');
 // authentication library
 const passport = require('passport');
 const LocalStrategy = require('./config/passport_local_strategy');
+const passportGoogle = require('./config/passport_google_strategy');
 
 // for session 
 

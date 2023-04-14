@@ -30,4 +30,8 @@ router.get('/interest/remove/:id',passport.checkAuthentication,userController.re
 router.get('/verify/:token',userController.verifyAccount);
 
 
+router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/user/login'}), userController.createSession);
+
+
 module.exports = router;
