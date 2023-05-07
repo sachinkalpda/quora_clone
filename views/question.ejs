@@ -7,18 +7,34 @@
                     <h2>
                         <%= question.content %>
                     </h2>
+                    <div class="question-info">
+                        <span>
+                            <% if(question.answers.length > 0){ %>
+                                
+                                <%= question.answers.length %> Answers
+                            <% }else{ %>
+                                  No Answers Yet                                                  
+                                
+                            <% } %>
+
+                        </span>
+                        <span><%= moment(question.createdAt).fromNow() %></span>
+                    </div>
+                    <% if(question.user.id != locals.user.id){ %>
                     <div class="question-details-options">
                         <a href="" class="theme-button-light rounded-pill active answer" data-bs-toggle="modal"
                             data-bs-target="#answer" data-id="<%= question._id %>"><i
                                 class="fa-regular fa-pen-to-square"></i>
-                            <% let users=answers.some(function(obj){ return
-                                obj.user._id===locals.user_id;}) %>
-                                <%= users %>
-                                <% if(users){ %>
-                                    Edit Answer
-                                    <%}else{ %>
-                                        Answer
-                                        <% } %>
+                            <% var ansUser = answers.find(function(obj){
+                                if(obj.user.id == locals.user.id){
+                                    return obj;
+                                }
+                            }); %>
+                            <% if(ansUser){ %>
+                                Edit Answer
+                            <%}else{ %>
+                                Answer
+                            <%} %>
                         </a>
                         <a href="/user/follow/<%= question.user.id %>" class="theme-button-light rounded-pill ms-3 follow-link"><i class="fa-solid fa-wifi"></i>
                             <% let follow=locals.user.following.some(function(obj){
@@ -47,6 +63,7 @@
                             </a>
                         </div>
                     </div>
+                    <%} %>
                 </div>
                 <p class="small-heading ms-3">Answers(<%= answers.length %>)</p>
                 <% for(let i of answers){ %>
@@ -54,7 +71,7 @@
                     <div class="question-card">
                         <div class="question-card-header">
                             <div class="user-image">
-                                <img src="<%= i.user.avatar %>" class="rounded" height="50px" width="50px">
+                                <img src=" <%= (i.user.avatar)? i.user.avatar :'/images/user.jpg' %>" class="rounded" height="50px" width="50px">
                             </div>
                             <div class="user-details ms-2">
                                 <div class="user-title">
@@ -130,7 +147,7 @@
                                     <% for(let comment of i.comments){ %>
                                         <div class="comment-list">
                                             <div class="comment-item">
-                                                <img src="<%= comment.user.avatar %>" height="50px" width="50px" class="rounded">
+                                                <img src="<%= (comment.user.avatar)? comment.user.avatar :'/images/user.jpg' %>" height="50px" width="50px" class="rounded">
                                                 <div class="comment-user-details">
                                                     <div class="comment-user-title">
                                                         <h5>
@@ -161,18 +178,15 @@
                 <div class="related-question-box">
                     <h4>Related Questions</h4>
                     <div class="question-list">
-                        <a href="#" class="theme-link">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        <% if(related_questions.length == 0){ %>
+                            No Question Found!
+                        <%} %>
+                        <%  for(let question of related_questions){ %>
+                        <a href="/question/view/<%= question.id %>" class="theme-link">
+                            <p><%= question.content %></p>
                         </a>
-                        <a href="#" class="theme-link">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                        </a>
-                        <a href="#" class="theme-link">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                        </a>
-                        <a href="#" class="theme-link">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                        </a>
+                        <%}%>
+
                     </div>
                 </div>
             </div>
@@ -196,7 +210,7 @@
                         <label for="about">Write Your Answer.</label>
                         <input type="hidden" id="question_id" name="question" value="">
                         <textarea id="about" rows="10" resize="no-resize" name="answer" class="form-custom w-100"
-                            placeholder="Write Your Answer..."><% if(users){%><%= users.content %><%} %></textarea>
+                            placeholder="Write Your Answer..."><%= (ansUser)? ansUser.content : '' %></textarea>
                     </div>
 
                 </div>

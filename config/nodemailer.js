@@ -4,11 +4,11 @@ const ejs = require('ejs');
 const path = require('path');
 
 const transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    host: process.env.HOST,
+    port: process.env.PORT,
     auth: {
-      user: "43508d2aae4a20",
-      pass: "74cd7093e3345c"
+        user: process.env.USER,
+        pass: process.env.PASSWORD
     }
   });
 

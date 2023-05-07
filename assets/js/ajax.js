@@ -88,13 +88,13 @@ $(document).ready(function(){
                 topicElement.append('<option value="'+topic._id+'">'+topic.name+'</option>')
             }
             
-            new Noty({
-                theme: 'relax',
-                text: data.message,
-                type: 'success',
-                layout: 'topRight',
-                timeout: 1500
-            }).show();
+            // new Noty({
+            //     theme: 'relax',
+            //     text: data.message,
+            //     type: 'success',
+            //     layout: 'topRight',
+            //     timeout: 1500
+            // }).show();
         })
         .fail(function(err){
             console.log("error in completing request");

@@ -10,6 +10,8 @@ const passport = require('passport');
 
 router.get('/',passport.checkAuthentication,homepageController.home);
 
+router.get('/chat',homepageController.chat);
+
 router.use('/user',require('./user'));
 router.use('/question',require('./question'));
 router.use('/comment',require('./comment'));

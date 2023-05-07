@@ -1,5 +1,7 @@
 const express = require('express');
 const port = 8000;
+
+require('dotenv').config();
 const app = express();
 
 var moment = require('moment');
@@ -42,7 +44,7 @@ app.set('views','./views');
 // use session
 app.use(session({
     name : 'quora',
-    secret: 'quora clone',
+    secret: process.env.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: { 

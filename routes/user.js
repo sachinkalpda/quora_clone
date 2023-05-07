@@ -30,6 +30,12 @@ router.get('/interest/remove/:id',passport.checkAuthentication,userController.re
 router.get('/verify/:token',userController.verifyAccount);
 
 
+router.post('/forgot-password',userController.forgotPassword);
+router.get('/reset/password/?:token',userController.resetPasswordLink);
+
+router.post('/password/reset',userController.resetPassword);
+
+
 router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
 router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/user/login'}), userController.createSession);
 

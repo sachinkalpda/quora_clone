@@ -1,4 +1,5 @@
 const Topic = require('../models/topic');
+
 module.exports.add = async function(req,res){
     try {
         const topic = await Topic.create({
@@ -44,3 +45,4 @@ module.exports.all = async function(req,res){
         
     }
 }
+

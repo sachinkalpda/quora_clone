@@ -9,7 +9,7 @@
                 <div class="question-card">
                     <div class="question-card-header">
                         <div class="user-image">
-                            <img src="<%= question.user.avatar %>" class="rounded" height="50px" width="50px">
+                            <img src="<%= (question.user.avatar)? question.user.avatar :'/images/user.jpg' %>" class="rounded" height="50px" width="50px">
                         </div>
                         <div class="user-details ms-2">
                             <div class="user-title">
@@ -87,7 +87,7 @@
                             <h4>No Topic Found!</h4>
                         <%} %>
                         <% for(let topic of locals.user.interests){ %>
-                        <a href="#" class="theme-link">
+                        <a href="/question/topic/<%= topic.id %>" class="theme-link">
                             <p><%= topic.name %></p>
                         </a>
                         <%} %>

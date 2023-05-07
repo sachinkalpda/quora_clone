@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="question-page-heading">
-                    <i class="fa-solid fa-star"></i> <h2>Questions For You</h2>
+                    <i class="fa-solid fa-star"></i> <h2>Questions You Asked</h2>
                 </div>
                 <% if(questions.length == 0){ %>
                     <h2>No Question Found!</h2>    
@@ -27,36 +27,7 @@
                         </span>
                         <span><%= moment(i.createdAt).fromNow() %></span>
                     </div>
-                    <div class="question-details-options">
-                        <a href="" class="theme-button-light rounded-pill active answer" data-bs-toggle="modal" data-bs-target="#answer" data-id="<%= i._id %>"><i
-                                class="fa-regular fa-pen-to-square"></i> Answer</a>
-                                <a href="/user/follow/<%= i.user.id %>" class="theme-button-light rounded-pill ms-3 follow-link"><i class="fa-solid fa-wifi"></i>
-                                    <% let follow=locals.user.following.some(function(obj){
-                                        return obj==i.user.id
-                                    } ) %>
-                                        <% if(follow){ %>
-                                            Following
-                                            <%}else{ %>
-                                                Follow
-                                                <% } %> </a>
-                            <div class="vote ms-3">
-                                <a href="/upvote/toggle/?id=<%= i.id %>&type=Question" class="d-flex upvote-link">
-                                    <div class="upvote">
-                                        <i class="fa-solid fa-caret-up"></i>
-                                    </div>
-                                    <div class="vote-center">
-                                        Upvote-<span>
-                                            <%= i.upvotes.length %>
-                                        </span>
-                                    </div>
-                                </a>
-                                <a href="/downvote/toggle/?id=<%= i.id %>&type=Question">
-                                    <div class="downvote">
-                                        <i class="fa-solid fa-caret-down"></i>
-                                    </div>
-                                </a>
-                            </div>
-                    </div>
+                    
                 </div>
                 <% } %>
                
@@ -70,7 +41,7 @@
 
 
 
- <!-- for answer the question -->
+//  <!-- for answer the question -->
  <div class="modal fade" id="answer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
  aria-labelledby="staticBackdropLabel" aria-hidden="true">
  <div class="modal-dialog modal-dialog-centered">

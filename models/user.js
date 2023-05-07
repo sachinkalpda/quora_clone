@@ -26,7 +26,6 @@ const userSchema = mongoose.Schema({
     },
     avatar : {
         type: String,
-        default: "/uploads/user/avatar/user.jpg",
     },
     verify : {
         type : Boolean,

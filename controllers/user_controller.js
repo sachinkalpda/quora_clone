@@ -4,8 +4,10 @@ const Token = require('../models/Token');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 const verifyEmailMailer = require('../mailers/verify_email_mailer');
+
 
 module.exports.login = function (req, res) {
     if (req.isAuthenticated()) {
@@ -23,7 +25,7 @@ module.exports.createUser = async function (req, res) {
             const newUser = await User.create({
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password
+                password: bcrypt.hashSync(req.body.password, 10)
             });
             let token = await Token.create({
                 token : crypto.randomBytes(32).toString("hex"),
@@ -62,7 +64,7 @@ module.exports.viewProfile = async function (req, res) {
 
     try {
         let topics = await Topic.find({});
-        let user = await User.findById(req.user.id).populate('interests');
+        let user = await User.findById(req.user.id).populate('interests').populate('followers').populate('following');
         if (user) {
             return res.render('profile', {
                 'userInfo': user,
@@ -245,7 +247,7 @@ module.exports.verifyAccount = async function(req,res){
             await user.save();
             await token.deleteOne();
             req.flash('success','Email Verified. Please Login to Continue');
-            return res.redirect('/login');
+            return res.redirect('/user/login');
         }
         req.flash('error',"User Doesn't Exist");
         return res.redirect('/user/login');
@@ -254,4 +256,69 @@ module.exports.verifyAccount = async function(req,res){
     req.flash('error','Invalid Token');
     return res.redirect('/user/login');
    
+}
+
+module.exports.forgotPassword = async function(req,res){
+    try {
+        let user = await User.findOne({email : req.body.email});
+        if(user){
+            let token = await Token.create({
+                token : crypto.randomBytes(32).toString("hex"),
+                user : user._id,
+            });
+            verifyEmailMailer.resetPassword(user,token);
+            req.flash('success','Reset Password Link Send to Your Email');
+            return res.redirect('back');
+
+        }else{
+            req.flash('error','Record Not Found!');
+            return res.redirect('back');
+        }
+        
+    } catch (err) {
+        console.log('Error User',err);        
+    }
+
+}
+
+module.exports.resetPasswordLink = async function(req,res){
+    let token = await Token.findOne({token: req.params.token});
+    if(token){
+        let user = await User.findById(token.user);
+        if(user){
+            return res.render('reset_password',{
+                token : token,
+            });
+        }
+        req.flash('error',"User Doesn't Exist");
+        return res.redirect('/user/login');
+
+    }
+    req.flash('error','Invalid Token');
+    return res.redirect('/user/login');
+
+}
+
+module.exports.resetPassword = async function(req,res){
+    let token = await Token.findOne({token: req.body.token});
+    if(token){
+        let user = await User.findById(token.user);
+        if(user){
+            if(req.body.password == req.body.password_confirm){
+                user.password = bcrypt.hashSync(req.body.password, 10);
+                await user.save();
+                await token.deleteOne();
+                req.flash('success','Password Changed. Please Login to Continue');
+                return res.redirect('/user/login');
+            }
+            req.flash('error',"Password Doesn't Match");
+            return res.redirect('/user/login');
+            
+        }
+        req.flash('error',"User Doesn't Exist");
+        return res.redirect('/user/login');
+
+    }
+    req.flash('error','Invalid Token');
+    return res.redirect('/user/login');
 }
