@@ -1,6 +1,8 @@
 const Answer = require('../models/answer');
 const Comment = require('../models/comment');
 
+
+// method for adding comment to question or answer
 module.exports.add = async function (req, res) {
 
     try {
@@ -30,7 +32,7 @@ module.exports.add = async function (req, res) {
     }
 }
 
-
+// method for deleting the comment of authorize user
 module.exports.delete = async function(req,res){
     // console.log(req.params.id);
     try {

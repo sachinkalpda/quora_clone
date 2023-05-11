@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 
 const verifyEmailMailer = require('../mailers/verify_email_mailer');
 
-
+// method for render the login page
 module.exports.login = function (req, res) {
     if (req.isAuthenticated()) {
         return res.redirect('/');
@@ -16,7 +16,7 @@ module.exports.login = function (req, res) {
     return res.render('login');
 }
 
-
+// method for register a new user
 module.exports.createUser = async function (req, res) {
     if (req.body.password == req.body.password_confirm) {
         const user = await User.findOne({ email: req.body.email });
@@ -42,12 +42,13 @@ module.exports.createUser = async function (req, res) {
     }
 }
 
-
+// method for login the user
 module.exports.createSession = function (req, res) {
     req.flash('success', 'Login Successfully');
     return res.redirect('/');
 }
 
+// method for logout the user
 module.exports.destroySession = function (req, res) {
     req.logout(function (err) {
         if (err) {
@@ -59,7 +60,7 @@ module.exports.destroySession = function (req, res) {
     })
 }
 
-
+// method for render the profile page
 module.exports.viewProfile = async function (req, res) {
 
     try {
@@ -82,6 +83,8 @@ module.exports.viewProfile = async function (req, res) {
 
 }
 
+
+// method for update the about info of user
 module.exports.updateAbout = async function (req, res) {
 
     try {
@@ -97,6 +100,8 @@ module.exports.updateAbout = async function (req, res) {
     }
 }
 
+
+// method for update the profession of user
 module.exports.updateProfession = async function (req, res) {
 
     try {
@@ -112,7 +117,7 @@ module.exports.updateProfession = async function (req, res) {
     }
 }
 
-
+// method update the user avatar
 module.exports.updateAvatar = async function (req, res) {
     try {
         let user = await User.findByIdAndUpdate(req.user.id);
@@ -141,6 +146,7 @@ module.exports.updateAvatar = async function (req, res) {
     }
 }
 
+// method for follow or unfollow a user
 module.exports.follow = async function (req, res) {
     try {
 
@@ -188,6 +194,7 @@ module.exports.follow = async function (req, res) {
     }
 }
 
+// method for saving the user interest
 module.exports.addInterest = async function (req, res) {
     try {
         let topic = await Topic.findById(req.body.interest);
@@ -216,6 +223,7 @@ module.exports.addInterest = async function (req, res) {
     }
 }
 
+// method for removing the saved interest of user
 module.exports.removeInterest = async function (req, res) {
     try {
         let topic = await Topic.findById(req.params.id);
@@ -237,7 +245,7 @@ module.exports.removeInterest = async function (req, res) {
     }
 }
 
-
+// method for verify the the account of user
 module.exports.verifyAccount = async function(req,res){
     let token = await Token.findOne({token: req.params.token});
     if(token){
@@ -258,6 +266,7 @@ module.exports.verifyAccount = async function(req,res){
    
 }
 
+// method for  forgot password of user
 module.exports.forgotPassword = async function(req,res){
     try {
         let user = await User.findOne({email : req.body.email});
@@ -281,6 +290,7 @@ module.exports.forgotPassword = async function(req,res){
 
 }
 
+// method for render the reset password page
 module.exports.resetPasswordLink = async function(req,res){
     let token = await Token.findOne({token: req.params.token});
     if(token){
@@ -299,6 +309,8 @@ module.exports.resetPasswordLink = async function(req,res){
 
 }
 
+
+// method for reset the password of user
 module.exports.resetPassword = async function(req,res){
     let token = await Token.findOne({token: req.body.token});
     if(token){

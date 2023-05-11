@@ -1,5 +1,6 @@
 const Question = require('../models/question');
 
+// method for render the homepage
 module.exports.home = async function(req,res){
     try {
         let topics = req.user.interests;
@@ -36,6 +37,3 @@ module.exports.home = async function(req,res){
     }
 }
 
-module.exports.chat = function(req,res){
-    return res.render('user_chat');
-}

@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
 
+// nodemailer creadentials initialization
 const transporter = nodemailer.createTransport({
     host: process.env.HOST,
     port: process.env.PORT,
@@ -15,7 +16,7 @@ const transporter = nodemailer.createTransport({
 
 const renderTemplate = (data,relativePath) =>{
     let mailHTML;
-
+    // for render the template for mail
     ejs.renderFile(
         path.join(__dirname,'../views/mailer',relativePath),
         data,

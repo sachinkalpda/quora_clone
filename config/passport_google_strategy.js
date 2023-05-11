@@ -6,7 +6,7 @@ const crypto = require('crypto');
 
 const User = require('../models/user');
 
-
+// using passport google startegy
 passport.use(new GoogleStrategy({
         clientID : process.env.CLIENT_ID,
         clientSecret : process.env.CLIENT_SECRET,

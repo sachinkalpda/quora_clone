@@ -267,7 +267,9 @@ nav{
 .right-sidebar-header{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid rgba(0,0,0,0.2);
+    padding-bottom: 1rem;
 }
 .right-sidebar h4{
     font-size: 18px;
@@ -341,7 +343,7 @@ nav{
     text-decoration: underline;
 }
 .user-credential{
-    margin-top: -7px;
+    margin-top: -3px;
     font-size: 14px;
     color: grey;
 }
@@ -545,7 +547,8 @@ nav{
 }
 .section-left{
     min-height: 50vh;
-    border: 1px solid red;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.3);
     width: 30%;
     overflow: scroll;
     overflow-x: hidden;
@@ -564,6 +567,7 @@ nav{
     display: flex;
     align-items: center;
     transition: all 0.2s ease-in;
+    cursor: pointer;
 }
 .chat-user-item:hover{
     background-color: bisque;
@@ -576,19 +580,48 @@ nav{
 }
 
 .section-right{
-    height: 90vh;
+    position: relative;
+    height: 70vh;
     width: 68%;
-    border: 1px solid blue;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,0.3);
     overflow: scroll;
     overflow-x: hidden;
+    padding-bottom: 30px;
+}
+.section-right input{
+    height: 40px;
+}
+.section-right button{
+    outline: none;
+}
+.chat-section{
+    padding: 50px 0px;
+}
+.chat-box{
+    text-align: center;
+    margin-top: 20%;
+    font-size: 60px;
+}
+.chat-box i{
+    color: #b92b27;
+}
+.chat-box h4{
+    font-size: 18px;
+    color: #b92b27;
 }
 .chat-header{
     position: fixed;
     display: block;
+    width: 57.3%;
     background-color: #fff;
 }
-.chat-bottom{
+.chat-footer{
     position: fixed;
+    bottom: 18vh;
+    width: 57.3%;
+    display: flex;
+    display: none;
 }
 .msg{
     margin: 5px 0px;

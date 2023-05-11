@@ -1,5 +1,7 @@
 const Topic = require('../models/topic');
 
+
+// method to add a new topic 
 module.exports.add = async function(req,res){
     try {
         const topic = await Topic.create({

@@ -41,6 +41,14 @@ app.set('layout extractScripts',true);
 app.set('view engine','ejs');
 app.set('views','./views');
 
+const chatServer = require('http').Server(app);
+
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer);
+
+chatServer.listen(5000);
+console.log('Chat server is running');
+
+
 // use session
 app.use(session({
     name : 'quora',

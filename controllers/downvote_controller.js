@@ -2,6 +2,8 @@ const Question = require('../models/question');
 const Answer = require('../models/answer');
 const Downvote = require('../models/downvote');
 
+
+// method for downvote the question or answer
 module.exports.toggle = async function (req, res) {
     console.log(req.query);
     if (req.query.type == 'Question' || req.query.type == 'Answer') {

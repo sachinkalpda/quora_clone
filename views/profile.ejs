@@ -45,16 +45,7 @@
                             data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
                             aria-selected="false">Following</button>
                     </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                            data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane"
-                            aria-selected="false">Following</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab"
-                            data-bs-target="#disabled-tab-pane" type="button" role="tab"
-                            aria-controls="disabled-tab-pane" aria-selected="false">Posts</button>
-                    </li>
+                    
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
@@ -102,10 +93,6 @@
                         </div>
                     
                     </div>
-                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
-                        tabindex="0">...</div>
-                    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab"
-                        tabindex="0">...</div>
                 </div>
             </div>
 
@@ -137,7 +124,7 @@
                 <div class="right-sidebar mt-3">
                     <div class="right-sidebar-header">
                         <h4>Interests</h4>
-                        <i class="fa-solid fa-plus" data-bs-toggle="modal" data-bs-target="#addTopic"></i>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTopic">Add New Topic</button>
                     </div>
                     <div class="right-sidebar-list">
                         <% if(userInfo.interests.length == 0){ %>

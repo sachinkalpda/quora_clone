@@ -2,6 +2,8 @@ const Question = require('../models/question');
 const Answer = require('../models/answer');
 const Topic = require('../models/topic');
 
+
+// method for adding a  new question
 module.exports.add = async function (req, res) {
 
 
@@ -28,6 +30,7 @@ module.exports.add = async function (req, res) {
 
 }
 
+// method for view all questions
 module.exports.all = async function (req, res) {
     try {
         let questions = await Question.find({ user: { $nin: req.user.id } }).populate('user').populate('upvotes');
@@ -41,7 +44,7 @@ module.exports.all = async function (req, res) {
     }
 }
 
-
+// method for view the question which user asked 
 module.exports.myQuestion = async function (req, res) {
     try {
         let questions = await Question.find({ user: req.user.id }).populate('user').populate('upvotes');
@@ -55,6 +58,7 @@ module.exports.myQuestion = async function (req, res) {
     }
 }
 
+// method to add or update the answer for a question
 module.exports.answer = async function (req, res) {
     try {
 
@@ -107,7 +111,7 @@ module.exports.answer = async function (req, res) {
     }
 }
 
-
+// method of view the qusetion and thier answers 
 module.exports.view = async function (req, res) {
     try {
         let question = await Question.findById(req.params.id).populate('user').populate('upvotes');
@@ -141,7 +145,7 @@ module.exports.view = async function (req, res) {
     }
 }
 
-
+// method for view the question related to a topic
 module.exports.topicWiseQuestion = async function(req,res){
     try {
         let topic = await Topic.findById(req.params.id);
@@ -163,7 +167,7 @@ module.exports.topicWiseQuestion = async function(req,res){
     }
 }
 
-
+// method for search a question
 module.exports.search = async function(req,res){
     try {
         let query = req.body.search;

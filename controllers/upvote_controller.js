@@ -2,6 +2,9 @@ const Question = require('../models/question');
 const Answer = require('../models/answer');
 const Upvote = require('../models/upvote');
 
+
+// method for upvoting the question or answer
+
 module.exports.toggle = async function (req, res) {
     if (req.query.type == 'Question' || req.query.type == 'Answer') {
         try {

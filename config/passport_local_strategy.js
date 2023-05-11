@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 const bcrypt = require('bcrypt');
 
-
+// using passport local strategy
 passport.use(new LocalStrategy({
         usernameField : 'email',
         passReqToCallback : true,
@@ -42,7 +42,7 @@ passport.deserializeUser(async function(id,done){
     }
 });
 
-
+// for checking user authentication
 passport.checkAuthentication = function(req,res,next){
     if(req.isAuthenticated()){
         return next();
@@ -50,7 +50,7 @@ passport.checkAuthentication = function(req,res,next){
     return res.redirect('/user/login');
 }
 
-
+// for seting user info to locals
 passport.setAuthenticatedUser = function(req,res,next){
 
     if(req.isAuthenticated()){

@@ -78,6 +78,7 @@
                                     <h5>
                                         <%= i.user.name %>
                                     </h5>
+                                    <% if(i.user.id != locals.user.id) { %>
                                     <a href="/user/follow/<%= i.user.id %>" class="follow-link"><i class="fa-solid fa-wifi"></i>
                                         <% let follow=locals.user.following.some(function(obj){
                                             return obj==i.user.id
@@ -90,6 +91,7 @@
                                     <span>
                                         <%= moment(i.createdAt).fromNow() %>
                                     </span>
+                                    <%} %>
                                 </div>
                                 <div class="user-credential">
                                     <p><% if(!i.user.profession){ %>

@@ -8,63 +8,51 @@
                             <h3>Chats</h3>
                         </div>
                         <div class="chat-user-list">
-                            <div class="chat-user-item">
+                            <% for(let user of currentUser.followers){ %>
+                            <div class="chat-user-item" data-id="<%= user.id %>">
                                 <div class="user-image">
-                                    <img src="/images/user.jpg" height="50px" width="50px" class="rounded-circle">
+                                    <img src="<%= (user.avatar)? user.avatar :'/images/user.jpg' %>" height="50px" width="50px" class="rounded-circle">
                                 </div>
-                                <div class="user-name">
-                                    User Name
-                                </div>
+                                <div class="user-name"><%= user.name %></div>
                             </div>
+                            <%} %>
                         </div>
                     </div>
                     <div class="section section-right">
                         <div class="chat-users-header chat-header">
-                            <h3>Chats</h3>
+                            <h3 id="current-user">Select a User</h3>
                         </div>
+                        <input type="hidden" id="room" />
+                        <input type="hidden" id="reciever" />
                         <div class="chat-section">
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
-                            <div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div><div class="msg left"><span>Message</span></div>
-                            <div class="msg right"><span>Message</span></div>
+                            <div class="chat-box">
+                                <i class="fa-regular fa-comments"></i>
+                                <h4>Please Select a Chat to Continue</h4>
+                            </div>
+                        </div>
+                        <div class="chat-footer">
+                            <input type="text" class="custom-form w-100" id="message" placeholder="Type Your Message...">
+                            <button id="send" class="theme-btn-icon"><i
+                                class="fa-regular fa-paper-plane"></i></button>
                         </div>
                     </div>
+                    
                 </div>
            </div>
         </div>
     </div>
 </main>
+
+
+<script src="/js/chat_engine.js"></script>
+<% if(locals.user) { %>
+<script >
+    new chatEngine('message','<%= locals.user.email  %>','<%= locals.user.id  %>')
+
+
+   
+
+
+
+</script>
+<% } %>
